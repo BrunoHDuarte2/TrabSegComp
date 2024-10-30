@@ -29,9 +29,7 @@ def descriptografa(mensagem: str, key: int):
     return msgDescripto
 
 # BREAKING CESAR
-
-import langid
-import string
+from collections import Counter
 from spellchecker import SpellChecker
 spell = SpellChecker(language='pt')
 def bruteForce(mensagem):
@@ -44,11 +42,43 @@ def bruteForce(mensagem):
     return descReal, key
 
 def analiseFrequencia(mensagem):
-    ## No português há 3 casos a serem analisados
     # A distribuição de frequência de algumas letras 
     # Letras repetidas juntas serão no geral: rr ou ss
-    # toda palavra no geral tem pelo menos
-    pass
+    ch, freq = Counter(mensagem).most_common(1)[0]
+    # Casos analisados:
+    numEquivalente = alfabetoNum.get(ch)
+    # Casos mais comuns (f>=5): a, e, o, i, r, s, n, d 
+    contMax = 0
+    key = 0 
+    if textPortugues(descriptografa(mensagem, (abs(alfabetoNum.get('A')-numEquivalente))).split())>=contMax:
+        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('A')-numEquivalente)).split())
+        key = abs(alfabetoNum.get('A')-numEquivalente)
+    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('E')-numEquivalente)).split())>=contMax:
+        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('E')-numEquivalente)).split())
+        key = abs(alfabetoNum.get('E')-numEquivalente)
+    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('O')-numEquivalente)).split())>=contMax:
+        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('O')-numEquivalente)).split())
+        key = abs(alfabetoNum.get('O')-numEquivalente)
+    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('I')-numEquivalente)).split())>=contMax:
+        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('I')-numEquivalente)).split())
+        key = abs(alfabetoNum.get('I')-numEquivalente)
+    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('R')-numEquivalente)).split())>=contMax:
+        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('R')-numEquivalente)).split())
+        key = abs(alfabetoNum.get('R')-numEquivalente)
+    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('S')-numEquivalente)).split())>=contMax:
+        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('S')-numEquivalente)).split())
+        key = abs(alfabetoNum.get('S')-numEquivalente)
+    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('N')-numEquivalente)).split())>=contMax:
+        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('N')-numEquivalente)).split())
+        key = abs(alfabetoNum.get('N')-numEquivalente)
+    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('D')-numEquivalente)).split())>=contMax:
+        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('D')-numEquivalente)).split())
+        key = abs(alfabetoNum.get('D')-numEquivalente)
+    return descriptografa(mensagem, key), key
+    
+    
+    
+    
 # Verifica se cada uma das palavras individualmente decifradas por uma chave i é parte da lingua portuguesa :)
 def textPortugues(texto: list):
     if texto == []:
@@ -59,6 +89,7 @@ def textPortugues(texto: list):
     else:
         return textPortugues(texto)
 
-print(criptografa("ABACATE É BOM DEMAIS", 5))
+"""print(criptografa("ABACATE É BOM DEMAIS", 5))
 print(descriptografa("DEDFDWH", 3))
-print(bruteForce("FGFHFYJ É GTR IJRFNX"))
+print(bruteForce("FGFHFYJ É GTR IJRFNX"))"""
+print(analiseFrequencia("FGFHFYJ É GTR IJRFNX"))
