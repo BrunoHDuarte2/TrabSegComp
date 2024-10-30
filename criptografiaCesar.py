@@ -89,7 +89,7 @@ def textPortugues(texto: list):
     else:
         return textPortugues(texto)
 
-"""print(criptografa("ABACATE É BOM DEMAIS", 5))
-print(descriptografa("DEDFDWH", 3))
-print(bruteForce("FGFHFYJ É GTR IJRFNX"))"""
+print(criptografa("ABACATE É BOM DEMAIS", 5))
+print(descriptografa("FGFHFYJ É GTR IJRFNX", 5))
+print(bruteForce("FGFHFYJ É GTR IJRFNX"))
 print(analiseFrequencia("FGFHFYJ É GTR IJRFNX"))
