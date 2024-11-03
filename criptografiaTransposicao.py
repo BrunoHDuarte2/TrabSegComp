@@ -1,7 +1,52 @@
-alfabetoNum = {chr(i): i - 65 for i in range(65, 91)}
-numLetra = {v: k for k, v in alfabetoNum.items()}
+import numpy as np
+from queue import Queue
 def criptografa(mensagem, chave):
-    qtdColunas = len(chave)
-    for char in mensagem:
-        if char.upper() in alfabetoNum.keys():
-            pass
+    mensagem = mensagem.replace(" ", "")
+    qtdLinhas = (len(mensagem)//len(chave)) if len(mensagem)%len(chave) == 0 else (len(mensagem)//len(chave))+1
+    matriz = np.full((qtdLinhas, len(chave)), "  ")
+    
+    linha = 0
+    for i in range(len(mensagem)):
+        if (i!=0 and i%len(chave)==0):
+            linha +=1
+        matriz[linha, i%len(chave)] = (mensagem[i].upper())
+    # Ordem das Colunas
+    ordemCerta = list(chave)
+    ordemCerta.sort()
+    fila = Queue()
+    for t in ordemCerta:
+        fila.put(t)
+    stringCriptografada = []
+    while not fila.empty():
+        test = matriz[:,chave.find(fila.get())]
+        for st in test:
+            if st != "  ":
+                stringCriptografada.append(st)
+    print(matriz)
+    return ''.join(stringCriptografada)
+def ordenar_colunas(chave):
+    # Retorna a ordem dos índices das colunas com base na chave
+    return sorted(range(len(chave)), key=lambda k: chave[k])
+def descriptografa(mensagem, chave):
+    # Saber quantos caracteres terão por coluna
+    # Insere a mensagem criptografada na matriz 
+    qtdLinhas = (len(mensagem)//len(chave)) if len(mensagem)%len(chave) == 0 else (len(mensagem)//len(chave))+1
+    matriz = np.full((qtdLinhas, len(chave)), "  ")
+    linha = 0
+    for i in range(len(mensagem)):
+        if (i!=0 and i%len(chave)==0):
+            linha +=1
+        matriz[linha, i%len(chave)] = (mensagem[i].upper())
+    # Quantidade de carateres que terão por coluna
+    sizes = []
+    for i in range(len(chave)):
+        sizes.append(tamanho(matriz[:,i]))
+    
+def tamanho(arr):
+    cont = 0 
+    for i in arr:
+        if i != "  ":
+            cont+=1
+    return cont
+print(criptografa("eu quero dar o toba", "fodase"))
+print(descriptografa("URQAARTEOOUDBEO", "fodase"))
