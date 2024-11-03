@@ -22,7 +22,7 @@ def criptografa(mensagem, chave):
         for st in test:
             if st != "  ":
                 stringCriptografada.append(st)
-    print(matriz)
+
     return ''.join(stringCriptografada)
 def ordenar_colunas(chave):
     # Retorna a ordem dos índices das colunas com base na chave
@@ -41,12 +41,24 @@ def descriptografa(mensagem, chave):
     sizes = []
     for i in range(len(chave)):
         sizes.append(tamanho(matriz[:,i]))
-    
+    listSize = sorted(list(zip(chave, sizes)))
+    for letra, tam in listSize:
+        coluna = list(mensagem[:tam])
+        if len(list(mensagem[:tam])) != matriz.shape[0]:
+            coluna.append("  ")
+        matriz[:,chave.find(letra)] =  coluna 
+        mensagem = mensagem[tam:]    
+    listDesc = []
+    for linha in matriz:
+        for char in linha:
+            if char != "  ":
+                listDesc.append(char)
+    return "".join(listDesc)
 def tamanho(arr):
     cont = 0 
     for i in arr:
         if i != "  ":
             cont+=1
     return cont
-print(criptografa("eu quero dar o toba", "fodase"))
-print(descriptografa("URQAARTEOOUDBEO", "fodase"))
+print(criptografa("aquecer o manguito e pros fracos", "supino"))
+print(descriptografa("EAOFCNEREGPAUMTSSARURCQOIOO", "supino"))
