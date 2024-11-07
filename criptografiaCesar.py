@@ -10,10 +10,7 @@ def criptografa(mensagem: str, key: int):
             msgCripto += char
         else:
             numEquivalente = getNum(char)
-            if numEquivalente+key>26:
-                msgCripto += numLetra.get((numEquivalente+key)%26)
-            else:
-                msgCripto += numLetra.get(numEquivalente+key)
+            msgCripto += numLetra.get((numEquivalente+key)%26)
     return msgCripto
 def descriptografa(mensagem: str, key: int):
     msgDescripto = ""
@@ -22,10 +19,7 @@ def descriptografa(mensagem: str, key: int):
             msgDescripto += char
         else:
             numEquivalente = getNum(char)
-            if numEquivalente-key<0:
-                msgDescripto += numLetra.get((numEquivalente-key)%26)
-            else:
-                msgDescripto += numLetra.get(numEquivalente-key)
+            msgDescripto += numLetra.get((abs(numEquivalente-key))%26)  
     return msgDescripto
 
 # BREAKING CESAR

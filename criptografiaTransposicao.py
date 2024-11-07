@@ -2,6 +2,8 @@ import numpy as np
 import itertools as it
 import math
 from queue import Queue
+from spellchecker import SpellChecker
+spell = SpellChecker(language='pt')
 def criptografa(mensagem, chave):
     qtdLinhas = (len(mensagem)//len(chave)) if len(mensagem)%len(chave) == 0 else (len(mensagem)//len(chave))+1
     matriz = np.full((qtdLinhas, len(chave)), " ")
@@ -32,14 +34,11 @@ def descriptografa(mensagem, chave):
     matriz = np.full((qtdLinhas, len(chave)), " ")
     ordemColunas = sorted(chave)
     for i in range(len(chave)):
-        print(mensagem[:qtdLinhas])
         coluna =list(mensagem[:qtdLinhas])
         if len(coluna)!=qtdLinhas and len(mensagem)<qtdLinhas:
             coluna = arrumaColuna(coluna, qtdLinhas)
         matriz[:, chave.find(ordemColunas[i])] =  coluna
-        print(matriz)
         mensagem = mensagem[qtdLinhas:]
-        print(mensagem)
     listDesc = []
     for linha in matriz:
         for char in linha:
@@ -55,9 +54,15 @@ def bruteForce(mensagem):
         p = it.permutations(criaChave(i+1))
         p = [''.join(p) for p in set(p)]
         for j in p:
-            descriptografa(mensagem, j)
+            palavras = descriptografa(mensagem, j).split()
+            palavrasEmPT = [item in spell for item in palavras]
+            if all(item for item in palavrasEmPT):
+                return (descriptografa(mensagem, j), j)
+def analiseTransposicao():
+    pass
+
 def criaChave(int):
     return ''.join(chr(ord('a') + j) for j in range(int))
-print(criptografa("aquecer o manguito e pros fracos", "supino"))
-print(descriptografa("E IPR CMTRA EAOOC UOU F ARN SOQ GE S", "eadcbgf"))
-print(bruteForce("E IPR CMTRA EAOOC UOU F ARN SOQ GE S"))
+print(criptografa("aquecer o manguito", "supino"))
+print(descriptografa("E ICMTEAOUOUARNQ G", "supino"))
+print(bruteForce("E ICMTEAOUOUARNQ G"))
