@@ -27,13 +27,12 @@ from collections import Counter
 from spellchecker import SpellChecker
 spell = SpellChecker(language='pt')
 def bruteForce(mensagem):
-    contadorMax = 0
     for i in range(26):
         desc = descriptografa(mensagem, i)
-        if (textPortugues(desc.split()))>=contadorMax:
-            contadorMax = textPortugues(desc.split())
+        if (textPortugues(desc.split()))>=1:
             descReal, key = desc, i
-    return descReal, key
+            return descReal, key
+    
 
 def analiseFrequencia(mensagem):
     # A distribuição de frequência de algumas letras 
@@ -42,33 +41,30 @@ def analiseFrequencia(mensagem):
     # Casos analisados:
     numEquivalente = alfabetoNum.get(ch)
     # Casos mais comuns (f>=5): a, e, o, i, r, s, n, d 
-    contMax = 0
-    key = 0 
-    if textPortugues(descriptografa(mensagem, (abs(alfabetoNum.get('A')-numEquivalente))).split())>=contMax:
-        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('A')-numEquivalente)).split())
+    if textPortugues(descriptografa(mensagem, (abs(alfabetoNum.get('A')-numEquivalente))).split())>=1:
         key = abs(alfabetoNum.get('A')-numEquivalente)
-    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('E')-numEquivalente)).split())>=contMax:
-        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('E')-numEquivalente)).split())
+        return descriptografa(mensagem, key), key
+    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('E')-numEquivalente)).split())>=1:
         key = abs(alfabetoNum.get('E')-numEquivalente)
-    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('O')-numEquivalente)).split())>=contMax:
-        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('O')-numEquivalente)).split())
+        return descriptografa(mensagem, key), key
+    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('O')-numEquivalente)).split())>=1:
         key = abs(alfabetoNum.get('O')-numEquivalente)
-    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('I')-numEquivalente)).split())>=contMax:
-        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('I')-numEquivalente)).split())
+        return descriptografa(mensagem, key), key
+    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('I')-numEquivalente)).split())>=1:
         key = abs(alfabetoNum.get('I')-numEquivalente)
-    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('R')-numEquivalente)).split())>=contMax:
-        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('R')-numEquivalente)).split())
+        return descriptografa(mensagem, key), key
+    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('R')-numEquivalente)).split())>=1:
         key = abs(alfabetoNum.get('R')-numEquivalente)
-    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('S')-numEquivalente)).split())>=contMax:
-        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('S')-numEquivalente)).split())
+        return descriptografa(mensagem, key), key
+    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('S')-numEquivalente)).split())>=1:
         key = abs(alfabetoNum.get('S')-numEquivalente)
-    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('N')-numEquivalente)).split())>=contMax:
-        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('N')-numEquivalente)).split())
+        return descriptografa(mensagem, key), key
+    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('N')-numEquivalente)).split())>=1:
         key = abs(alfabetoNum.get('N')-numEquivalente)
-    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('D')-numEquivalente)).split())>=contMax:
-        contMax = textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('D')-numEquivalente)).split())
+        return descriptografa(mensagem, key), key
+    if textPortugues(descriptografa(mensagem, abs(alfabetoNum.get('D')-numEquivalente)).split())>=1:
         key = abs(alfabetoNum.get('D')-numEquivalente)
-    return descriptografa(mensagem, key), key
+        return descriptografa(mensagem, key), key
     
     
     
@@ -83,7 +79,7 @@ def textPortugues(texto: list):
     else:
         return textPortugues(texto)
 
-print(criptografa("ABACATE É BOM DEMAIS", 5))
-print(descriptografa("FGFHFYJ É GTR IJRFNX", 5))
-print(bruteForce("FGFHFYJ É GTR IJRFNX"))
-print(analiseFrequencia("FGFHFYJ É GTR IJRFNX"))
+print(criptografa("Eu Amo Emo", 5))
+print(descriptografa("JZ FRT JRT", 5))
+print(bruteForce("JZ FRT JRT"))
+print(analiseFrequencia("JZ FRT JRT"))
