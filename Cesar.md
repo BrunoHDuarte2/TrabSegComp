@@ -10,6 +10,9 @@ Onde numChar é o número que equivale ao char que se está cifrando, dessa form
 $ numeroDaLetra =  (numChar(z)+3)mod26 $
 Onde, numChar(z) = 25, então numeroDaLetra = 2, ou seja z será criptografado como B com chave igual a 3.
 
+### Descriptografa()
+
+De forma análoga a volta dessa critografia é feita utilizando ao invés de somar a chave, se subtraindo. 
 
 ### BruteForte()
 A força bruta nessa criptografia é feita com base todas as chaves possíveis, tendo em vista a caracteristica cíclica dessa cifra é necessário somente 26 tentativas para quebra essa cifra, pois pela forma cíclica cifrar usando chave 3 ou $26+3$ ou $ (n*26+3),\forall n\in \mathbb{N} $. Dito isso para quebrar essa cifra basta testar toda chave que segue:
