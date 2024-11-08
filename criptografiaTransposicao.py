@@ -49,7 +49,6 @@ def arrumaColuna(coluna, qtd):
         coluna.append(" ")
     return coluna
 def bruteForce(mensagem):
-    # testar para toda len(chave)<len(mensagem)
     for i in range(len(mensagem)):
         p = it.permutations(criaChave(i+1))
         p = [''.join(p) for p in set(p)]
@@ -58,11 +57,13 @@ def bruteForce(mensagem):
             palavrasEmPT = [item in spell for item in palavras]
             if all(item for item in palavrasEmPT):
                 return (descriptografa(mensagem, j), j)
-def analiseTransposicao():
+def analise():
     pass
 
 def criaChave(int):
     return ''.join(chr(ord('a') + j) for j in range(int))
-print(criptografa("aquecer o manguito", "supino"))
-print(descriptografa("E ICMTEAOUOUARNQ G", "supino"))
-print(bruteForce("E ICMTEAOUOUARNQ G"))
+print(criptografa("eu amo chocolate", "amor"))
+print(descriptografa("EMHLUOOA  CTACOE", "amor"))
+print(bruteForce("EMHLUOOA  CTACOE"))
+
+print(sorted("MENTIRA"))
