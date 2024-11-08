@@ -19,3 +19,4 @@ Dessa forma, ao fazer um loop por todas essas possibilidades a mensagem é quebr
 ### AnaliseFrequencia()
 Utilizando algumas caracteristicas da lingua portuguesa pode-se melhorar a efetividade de uma brute force. Utilizando a distribuição de frequência dada, se extraiu a letra mais comum numa mensagem cifrada e então pode-se tentar os casos mais comuns na nossa língua, foi separado 10 casos mais comuns: a, e, o, i, r, s, n, d.
 E então, em ordem se calcula a diferença entre a letra mais frequente na mensagem e os casos mais comuns, para então descifrar a mensagem com essa diferença, se caso alguma tentativa dessas gerar uma frase que contém palavras em português se retorna a mensagem descriptografada e a chave utilizada.
+Dessa forma, esse método se mostra uma alternativa ao BruteForce mas que funciona de forma parecida, apenas tentando se diminuir o espaço de tentativas. 
